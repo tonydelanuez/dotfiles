@@ -105,5 +105,10 @@ PATH="$PATH:$HOME/.local/bin"
 cd ~
 
 export DOCKER_HOST=tcp://localhost:2375
-alias config='/usr/bin/git --git-dir=/home/tony/.cfg/ --work-tree=/home/tony'
-alias historyfix='$HOME/.scripts/fix_history'
+
+if [ -e $HOME/.zsh_aliases ]; then
+	source $HOME/.zsh_aliases
+fi
+
+# Zsh to use the same colors as ls
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  

@@ -1,0 +1,6 @@
+alias config='/usr/bin/git --git-dir=/home/tony/.cfg/ --work-tree=/home/tony'
+alias historyfix='$HOME/.scripts/fix_history'
+
+# Python
+alias ve='/usr/bin/python3 -m venv .venv'
+alias va='source ./venv/bin/activate'
