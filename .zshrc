@@ -106,8 +106,14 @@ cd ~
 
 export DOCKER_HOST=tcp://localhost:2375
 
+# Aliases
 if [ -e $HOME/.zsh_aliases ]; then
 	source $HOME/.zsh_aliases
+fi
+
+# SSH AGENT CONFIG
+if [ -e $HOME/.ssh_agent ]; then
+	source $HOME/.ssh_agent
 fi
 
 # Zsh to use the same colors as ls
