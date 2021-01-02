@@ -102,7 +102,6 @@ function virtualenv_info {
 	[ $VIRTUAL_ENV ] && echo ‘(‘`basename $VIRTUAL_ENV`’) ‘ 
 }
 PATH="$PATH:$HOME/.local/bin"
-cd ~
 
 export DOCKER_HOST=tcp://localhost:2375
 
