@@ -103,7 +103,6 @@ function virtualenv_info {
 }
 PATH="$PATH:$HOME/.local/bin"
 
-export DOCKER_HOST=tcp://localhost:2375
 
 # Aliases
 if [ -e $HOME/.zsh_aliases ]; then
@@ -123,5 +122,5 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
-export GOPATH=~/go
-export PATH=$PATH:~/go/bin
+export PATH=$PATH:/usr/local/go/bin
+
