@@ -114,6 +114,11 @@ if [ -e $HOME/.ssh_agent ]; then
 	source $HOME/.ssh_agent
 fi
 
+# X Server setup
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+export LIBGL_ALWAYS_INDIRECT=1
+sudo /etc/init.d/dbus start &> /dev/null
+
 # Zsh to use the same colors as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
 
@@ -124,3 +129,4 @@ export PATH="$HOME/gems/bin:$PATH"
 
 export PATH=$PATH:/usr/local/go/bin
 
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
