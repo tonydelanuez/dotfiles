@@ -1,0 +1,55 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+DOTFILES_DIR="${0:A:h:h}"
+
+die() {
+  print -u2 "error: $*"
+  exit 1
+}
+
+link_file() {
+  local source="$1"
+  local target="$2"
+
+  mkdir -p "${target:h}"
+
+  if [[ -L "$target" && "$(readlink "$target")" == "$source" ]]; then
+    return
+  fi
+
+  if [[ -e "$target" || -L "$target" ]]; then
+    local backup="$target.dotfiles-backup.$(date +%Y%m%d%H%M%S)"
+    print "Backing up $target -> $backup"
+    mv "$target" "$backup"
+  fi
+
+  ln -s "$source" "$target"
+  print "Linked $target"
+}
+
+if ! command -v brew >/dev/null 2>&1; then
+  die "Homebrew is required. Install it from https://brew.sh and run this again."
+fi
+
+print "Installing Homebrew dependencies..."
+brew bundle --file="$DOTFILES_DIR/Brewfile"
+
+link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+link_file "$DOTFILES_DIR/.zsh_aliases" "$HOME/.zsh_aliases"
+link_file "$DOTFILES_DIR/.ssh_agent" "$HOME/.ssh_agent"
+link_file "$DOTFILES_DIR/.scripts" "$HOME/.scripts"
+link_file "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
+
+if [[ -d "$HOME/Library/Fonts" ]]; then
+  link_file "$DOTFILES_DIR/fonts/sketchybar-app-font.ttf" \
+            "$HOME/Library/Fonts/sketchybar-app-font.ttf"
+fi
+
+brew services restart sketchybar 2>/dev/null || brew services start sketchybar
+yabai --start-service || true
+
+print ""
+print "Dotfiles installed from $DOTFILES_DIR"
+print "Grant Accessibility permissions to yabai and SketchyBar if prompted."

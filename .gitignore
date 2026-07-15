@@ -1,0 +1,10 @@
+.DS_Store
+
+# Machine-local state and secrets
+.env*
+*.local
+ssh-agent.env
+
+# Generated/runtime files
+.cache/
+config/**/.cache/

@@ -1,0 +1,177 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top display=all height=40 margin=0 corner_radius=0 \
+                 blur_radius=20 color=0x55000000 \
+                 border_width=0 shadow=off topmost=off show_in_fullscreen=off \
+                 padding_left=14 padding_right=14
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=2
+  padding_right=2
+  icon.font="Hack Nerd Font:Regular:14.0"
+  label.font="SF Pro Text:Medium:12.0"
+  icon.color=0xffd3d9e2
+  label.color=0xffd3d9e2
+  icon.highlight_color=0xff17202b
+  label.highlight_color=0xff17202b
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+##### Adding Mission Control Space Indicators #####
+# Let's add some mission control spaces:
+# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
+# to indicate active and available mission control spaces.
+
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid="$(($i+1))"
+  space=(
+    space="$sid"
+    icon="${SPACE_ICONS[i]}"
+    icon.padding_left=7
+    icon.padding_right=7
+    icon.width=24
+    icon.align=center
+    label.font="sketchybar-app-font:Regular:16.0"
+    label.color=0xffd3d9e2
+    label.highlight_color=0xff17202b
+    label.drawing=on
+    label.padding_left=3
+    label.padding_right=5
+    background.drawing=off
+    script="$PLUGIN_DIR/space.sh"
+    click_script="yabai -m space --focus $sid"
+  )
+  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+  for slot in 1 2 3
+  do
+    sketchybar --add item app_icon."$sid"."$slot" left \
+               --set app_icon."$sid"."$slot" \
+                    drawing=off \
+                    space="$sid" \
+                    width=22 \
+                    padding_left=3 \
+                    padding_right=3 \
+                    icon.font="sketchybar-app-font:Regular:16.0" \
+                    icon.color=0xffd3d9e2 \
+                    background.drawing=off \
+                    click_script="yabai -m space --focus $sid"
+  done
+  sketchybar --add bracket desktop."$sid" \
+             space."$sid" app_icon."$sid".1 app_icon."$sid".2 app_icon."$sid".3 \
+             --set desktop."$sid" \
+                  background.drawing=on \
+                  background.color=0xe0000000 \
+                  background.border_color=0x253d4b5a \
+                  background.border_width=1 \
+                  background.corner_radius=7 \
+                  background.height=30 \
+                  background.padding_left=4 \
+                  background.padding_right=4
+  sketchybar --add item desktop_spacer."$sid" left \
+             --set desktop_spacer."$sid" \
+                  width=18 \
+                  drawing=off
+done
+
+# Spotify now-playing widget. It lives on the left side so it remains visible
+# on notched MacBooks without relying on the center section.
+sketchybar --add item now_playing left \
+           --set now_playing drawing=off \
+                          icon= \
+                          icon.color=0xffd3d9e2 \
+                          icon.padding_left=18 \
+                          label.font="SF Pro Text:Medium:13.0" \
+                          ignore_association=on \
+                          padding_left=18 \
+                          padding_right=18 \
+                          label.padding_left=18 \
+                          label.padding_right=18 \
+                          background.drawing=on \
+                          background.color=0xe0000000 \
+                          background.corner_radius=8 \
+                          background.height=32 \
+                          background.padding_left=4 \
+                          background.padding_right=4 \
+                          scroll_texts=on \
+                          max_chars=48 \
+                          update_freq=5 \
+                          script="$PLUGIN_DIR/spotify.sh"
+
+##### Adding Left Items #####
+
+# Refresh all desktop labels when the active space or foreground app changes.
+sketchybar --add item space_updater left \
+           --set space_updater drawing=off script="$PLUGIN_DIR/spaces.sh" \
+           --subscribe space_updater space_change front_app_switched display_change system_woke
+
+##### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+# Some items refresh on a fixed cycle, e.g. the clock runs its script once
+# every 10s. Other items respond to events they subscribe to, e.g. the
+# volume.sh script is only executed once an actual change in system audio
+# volume is registered. More info about the event system can be found here:
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add item discord right \
+           --set discord drawing=off \
+                         icon=":discord:" \
+                         icon.font="sketchybar-app-font:Regular:15.0" \
+                         label.font="SF Pro Text:Semibold:12.0" \
+                         icon.padding_left=6 \
+                         icon.padding_right=6 \
+                         label.padding_left=6 \
+                         label.padding_right=6 \
+                         background.drawing=on \
+                         background.color=0xe0000000 \
+                         background.corner_radius=8 \
+                         background.height=30 \
+                         background.padding_left=12 \
+                         background.padding_right=12 \
+                         update_freq=4 \
+                         click_script="open -a 'Discord Canary'" \
+                         script="$PLUGIN_DIR/discord.sh" \
+           --add item clock right \
+           --set clock update_freq=10 icon=󰃰 script="$PLUGIN_DIR/clock.sh" \
+           --set clock background.drawing=on background.color=0xe0000000 \
+                        background.corner_radius=8 background.height=30 \
+           --add item volume right \
+           --set volume icon=󰕾 update_freq=5 script="$PLUGIN_DIR/volume.sh" \
+           --set volume background.drawing=on background.color=0xe0000000 \
+                         background.corner_radius=8 background.height=30 \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery icon= update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --set battery background.drawing=on background.color=0xe0000000 \
+                          background.corner_radius=8 background.height=30 \
+           --subscribe battery system_woke power_source_change
+
+sketchybar --reorder clock volume battery discord
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
