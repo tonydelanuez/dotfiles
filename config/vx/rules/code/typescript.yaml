@@ -1,0 +1,46 @@
+# TypeScript code profile.
+# Loaded after global.yaml and code/global.yaml.
+# Inherits all JavaScript patterns — duplicate common ones here if needed.
+
+rules:
+  # Types
+  - trigger: "type alias"
+    replace: "type  = "
+  - trigger: "interface"
+    replace: "interface  {}"
+  - trigger: "readonly"
+    replace: "readonly "
+  - trigger: "optional field"
+    replace: "?: "
+  - trigger: "as type"
+    replace: " as "
+  - trigger: "generic type"
+    replace: "<>"
+  - trigger: "unknown type"
+    replace: "unknown"
+  - trigger: "never type"
+    replace: "never"
+  - trigger: "void type"
+    replace: "void"
+
+  # Utility types
+  - trigger: "partial type"
+    replace: "Partial<>"
+  - trigger: "required type"
+    replace: "Required<>"
+  - trigger: "record type"
+    replace: "Record<string, >"
+  - trigger: "pick type"
+    replace: "Pick<>"
+  - trigger: "omit type"
+    replace: "Omit<>"
+
+  # Declarations (same as JS but worth keeping here)
+  - trigger: "const"
+    replace: "const "
+  - trigger: "async function"
+    replace: "async function "
+  - trigger: "await"
+    replace: "await "
+  - trigger: "console log"
+    replace: "console.log()"

@@ -22,5 +22,11 @@ export EDITOR="${EDITOR:-vim}"
 export VISUAL="${VISUAL:-$EDITOR}"
 export GEM_HOME="$HOME/gems"
 
+alias k='kubectl'
+
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
 [[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 [[ -r "$HOME/.ssh_agent" ]] && source "$HOME/.ssh_agent"
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

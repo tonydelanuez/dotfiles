@@ -1,0 +1,4 @@
+# AI instructions for Terminal mode (Terminal, iTerm2, Warp, etc.).
+#
+# Preserve all flags, paths, and command syntax exactly.
+# Do not add trailing punctuation.

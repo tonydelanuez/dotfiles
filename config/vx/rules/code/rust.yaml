@@ -1,0 +1,61 @@
+# Rust code profile.
+# Loaded after global.yaml and code/global.yaml.
+
+rules:
+  # Attributes
+  - trigger: "derive debug"
+    replace: "#[derive(Debug)]"
+  - trigger: "derive clone"
+    replace: "#[derive(Debug, Clone)]"
+  - trigger: "derive serialize"
+    replace: "#[derive(Debug, Serialize, Deserialize)]"
+  - trigger: "allow dead code"
+    replace: "#[allow(dead_code)]"
+  - trigger: "test attribute"
+    replace: "#[test]"
+  - trigger: "cfg test"
+    replace: "#[cfg(test)]"
+
+  # Types
+  - trigger: "result type"
+    replace: "Result<(), Error>"
+  - trigger: "option type"
+    replace: "Option<>"
+  - trigger: "box type"
+    replace: "Box<>"
+  - trigger: "arc type"
+    replace: "Arc<>"
+  - trigger: "string type"
+    replace: "String"
+  - trigger: "str slice"
+    replace: "&str"
+  - trigger: "vec type"
+    replace: "Vec<>"
+
+  # Error handling
+  - trigger: "question mark"
+    replace: "?"
+  - trigger: "unwrap or"
+    replace: ".unwrap_or()"
+  - trigger: "unwrap or else"
+    replace: ".unwrap_or_else(|e| )"
+  - trigger: "ok or"
+    replace: ".ok_or()"
+  - trigger: "map error"
+    replace: ".map_err(|e| )"
+
+  # Closures and iterators
+  - trigger: "closure"
+    replace: "|x| "
+  - trigger: "map iter"
+    replace: ".iter().map(|x| ).collect::<Vec<_>>()"
+  - trigger: "filter iter"
+    replace: ".iter().filter(|x| ).collect::<Vec<_>>()"
+
+  # I/O
+  - trigger: "println"
+    replace: "println!(\"{\")"
+  - trigger: "eprintln"
+    replace: "eprintln!(\"{\")"
+  - trigger: "format macro"
+    replace: "format!(\"{\")"

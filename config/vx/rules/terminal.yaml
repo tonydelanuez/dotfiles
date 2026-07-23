@@ -1,0 +1,50 @@
+# Terminal mode rules — applied after global.yaml.
+
+rules:
+  # Redirection and logic
+  - trigger: "redirect"
+    replace: ">"
+  - trigger: "append"
+    replace: ">>"
+  - trigger: "redirect error"
+    replace: "2>"
+  - trigger: "redirect all"
+    replace: "&>"
+  - trigger: "background"
+    replace: "&"
+  - trigger: "and and"
+    replace: "&&"
+  - trigger: "or or"
+    replace: "||"
+
+  # Paths
+  - trigger: "dollar sign"
+    replace: "$"
+  - trigger: "tilde slash"
+    replace: "~/"
+  - trigger: "dot slash"
+    replace: "./"
+  - trigger: "dot dot slash"
+    replace: "../"
+  - trigger: "dev null"
+    replace: "/dev/null"
+
+  # Git shortcuts
+  - trigger: "git checkout branch"
+    replace: "git checkout -b "
+  - trigger: "git status"
+    replace: "git status"
+  - trigger: "git add all"
+    replace: "git add -A"
+  - trigger: "git push origin"
+    replace: "git push origin "
+
+  # Common flags
+  - trigger: "flag recursive"
+    replace: "-r"
+  - trigger: "flag force"
+    replace: "-f"
+  - trigger: "flag verbose"
+    replace: "-v"
+  - trigger: "flag all"
+    replace: "-a"

@@ -1,0 +1,41 @@
+# JavaScript code profile.
+# Loaded after global.yaml and code/global.yaml.
+
+rules:
+  # Declarations
+  - trigger: "const"
+    replace: "const "
+  - trigger: "let var"
+    replace: "let "
+  - trigger: "arrow function"
+    replace: "() => "
+  - trigger: "async function"
+    replace: "async function "
+  - trigger: "await"
+    replace: "await "
+
+  # Common expressions
+  - trigger: "console log"
+    replace: "console.log()"
+  - trigger: "console error"
+    replace: "console.error()"
+  - trigger: "strict mode"
+    replace: "'use strict';"
+  - trigger: "undefined check"
+    replace: "=== undefined"
+  - trigger: "null check"
+    replace: "=== null"
+  - trigger: "spread operator"
+    replace: "..."
+  - trigger: "template literal"
+    replace: "``"
+  - trigger: "optional chain"
+    replace: "?."
+  - trigger: "nullish"
+    replace: " ?? "
+
+  # Modules
+  - trigger: "export default"
+    replace: "export default "
+  - trigger: "named export"
+    replace: "export "

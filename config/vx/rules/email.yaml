@@ -1,0 +1,11 @@
+# Email mode rules — applied after global.yaml.
+# Formatting is primarily handled by AI post-processing.
+# Add shortcuts specific to email composition here, e.g.:
+#
+#   - trigger: "best regards"
+#     replace: "Best regards,"
+#
+#   - trigger: "my email address"
+#     replace: "you@example.com"
+
+rules: []

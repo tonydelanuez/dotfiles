@@ -1,0 +1,57 @@
+# Go code profile.
+# Loaded after global.yaml and code/global.yaml.
+
+rules:
+  # Error handling (the most common Go pattern)
+  - trigger: "error check"
+    replace: "if err != nil {\n\treturn err\n}"
+  - trigger: "error check log"
+    replace: "if err != nil {\n\tlog.Fatal(err)\n}"
+  - trigger: "returns error"
+    replace: "error"
+
+  # fmt package
+  - trigger: "print line"
+    replace: "fmt.Println()"
+  - trigger: "print f"
+    replace: "fmt.Printf(\"\\n\")"
+  - trigger: "format string"
+    replace: "fmt.Sprintf(\"\", )"
+  - trigger: "error f"
+    replace: "fmt.Errorf(\"\", )"
+
+  # Context
+  - trigger: "context background"
+    replace: "context.Background()"
+  - trigger: "context todo"
+    replace: "context.TODO()"
+  - trigger: "with context"
+    replace: "ctx context.Context"
+
+  # Channels and goroutines
+  - trigger: "make channel"
+    replace: "make(chan , )"
+  - trigger: "go routine"
+    replace: "go func() {\n\t\n}()"
+  - trigger: "defer close"
+    replace: "defer close()"
+  - trigger: "wait group"
+    replace: "var wg sync.WaitGroup"
+
+  # Slices and maps
+  - trigger: "make slice"
+    replace: "make([], 0)"
+  - trigger: "make map"
+    replace: "make(map[])"
+  - trigger: "append"
+    replace: "append(, )"
+
+  # Common patterns
+  - trigger: "short declare"
+    replace: " := "
+  - trigger: "var declare"
+    replace: "var  "
+  - trigger: "interface any"
+    replace: "interface{}"
+  - trigger: "log fatal"
+    replace: "log.Fatal()"

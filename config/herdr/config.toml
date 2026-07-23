@@ -1,0 +1,18 @@
+# herdr configuration
+# Keybindings ported from ~/.tmux.conf
+
+[theme]
+name = "catppuccin"
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+[keys]
+prefix = "ctrl+s"
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+split_vertical = "prefix+%"
+split_horizontal = 'prefix+"'
+new_tab = "prefix+c"

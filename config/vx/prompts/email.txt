@@ -1,0 +1,5 @@
+# AI instructions for Email mode (Mail, Outlook, Mimestream, etc.).
+#
+# Example:
+# Always close with "Best, [Your Name]".
+# Use a formal salutation if one is not already present.

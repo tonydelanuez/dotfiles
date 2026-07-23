@@ -29,6 +29,26 @@ link_file() {
   print "Linked $target"
 }
 
+install_font() {
+  local source="$1"
+  local target="$2"
+
+  mkdir -p "${target:h}"
+
+  if [[ -f "$target" ]] && cmp -s "$source" "$target"; then
+    return
+  fi
+
+  if [[ -e "$target" || -L "$target" ]]; then
+    local backup="$target.dotfiles-backup.$(date +%Y%m%d%H%M%S)"
+    print "Backing up $target -> $backup"
+    mv "$target" "$backup"
+  fi
+
+  cp "$source" "$target"
+  print "Installed font $target"
+}
+
 if ! command -v brew >/dev/null 2>&1; then
   die "Homebrew is required. Install it from https://brew.sh and run this again."
 fi
@@ -41,14 +61,20 @@ link_file "$DOTFILES_DIR/.zsh_aliases" "$HOME/.zsh_aliases"
 link_file "$DOTFILES_DIR/.ssh_agent" "$HOME/.ssh_agent"
 link_file "$DOTFILES_DIR/.scripts" "$HOME/.scripts"
 link_file "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
+link_file "$DOTFILES_DIR/config/herdr" "$HOME/.config/herdr"
+link_file "$DOTFILES_DIR/config/vx" "$HOME/.vx"
+link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" \
+          "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 
 if [[ -d "$HOME/Library/Fonts" ]]; then
-  link_file "$DOTFILES_DIR/fonts/sketchybar-app-font.ttf" \
-            "$HOME/Library/Fonts/sketchybar-app-font.ttf"
+  install_font "$DOTFILES_DIR/fonts/sketchybar-app-font.ttf" \
+               "$HOME/Library/Fonts/sketchybar-app-font.ttf"
 fi
 
 brew services restart sketchybar 2>/dev/null || brew services start sketchybar
 yabai --start-service || true
+sketchybar --reload
+"$DOTFILES_DIR/config/amethyst/defaults.sh"
 
 print ""
 print "Dotfiles installed from $DOTFILES_DIR"

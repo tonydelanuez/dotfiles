@@ -1,0 +1,5 @@
+# AI instructions for Chat mode (Slack, Discord, Messages, Teams, etc.).
+#
+# Example:
+# Keep responses concise — no more than 2 sentences unless the input is long.
+# Contractions and casual punctuation are fine.

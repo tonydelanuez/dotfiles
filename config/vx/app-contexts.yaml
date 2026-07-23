@@ -1,0 +1,24 @@
+# vx app context mappings
+# Maps macOS bundle IDs to dictation contexts.
+# Custom entries here override vx's built-in mappings.
+#
+# Contexts:
+#   email     - professional prose, formal tone
+#   chat      - casual messaging, relaxed punctuation
+#   document  - structured prose, markdown formatting
+#   terminal  - shell commands, preserve syntax exactly
+#   code      - generic code mode
+#   code/swift, code/python, code/typescript, code/javascript,
+#   code/go, code/rust  - language-specific code mode
+#   general   - no override; falls back to your manually selected mode
+#
+# To find an app's bundle ID, run in Terminal:
+#   osascript -e 'id of app "AppName"'
+#
+# Examples (uncomment and edit as needed):
+#
+# com.google.Chrome: document
+# com.figma.Desktop: document
+# com.linear.linear: chat
+# com.superhuman.Superhuman: email
+# com.apple.Safari: general

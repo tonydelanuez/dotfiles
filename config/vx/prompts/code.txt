@@ -1,0 +1,5 @@
+# AI instructions for Code mode (Xcode, VS Code, Cursor, etc.).
+#
+# Example:
+# Preserve all camelCase and snake_case identifiers exactly as spoken.
+# Do not add prose punctuation inside code snippets.

@@ -1,0 +1,19 @@
+# Generic code profile — language-agnostic snippets.
+# Loaded after code/global.yaml.
+# A good place for patterns that work across multiple languages.
+
+rules:
+  - trigger: "semicolon"
+    replace: ";"
+  - trigger: "colon colon"
+    replace: "::"
+  - trigger: "question mark"
+    replace: "?"
+  - trigger: "null check"
+    replace: "!= null"
+  - trigger: "not null"
+    replace: "!= null"
+  - trigger: "todo comment"
+    replace: "// TODO: "
+  - trigger: "fixme comment"
+    replace: "// FIXME: "

@@ -1,0 +1,9 @@
+# AI instructions for Plain Text mode.
+# Applied during general dictation with no specific app context.
+#
+# Filler removal and stutter/repetition smoothing is now a built-in toggle:
+#   Preferences -> Configuration -> "Remove filler words & smooth speech".
+# Add only mode-specific instructions here.
+#
+# Example:
+# Always use American English spelling.

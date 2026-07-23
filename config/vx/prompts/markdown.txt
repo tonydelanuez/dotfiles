@@ -1,0 +1,5 @@
+# AI instructions for Markdown mode (Notion, Obsidian, Notes, etc.).
+#
+# Example:
+# Format enumerated items as markdown bullet lists.
+# Use sentence case for headings.

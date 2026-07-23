@@ -1,0 +1,39 @@
+# Swift code profile.
+# Loaded after global.yaml and code/global.yaml.
+
+rules:
+  # Types and optionals
+  - trigger: "optional type"
+    replace: "?"
+  - trigger: "force unwrap"
+    replace: "!"
+  - trigger: "nil coalescing"
+    replace: " ?? "
+  - trigger: "if let"
+    replace: "if let  = "
+  - trigger: "guard let"
+    replace: "guard let  = "
+
+  # Common patterns
+  - trigger: "returns void"
+    replace: "-> Void"
+  - trigger: "return nil"
+    replace: "return nil"
+  - trigger: "throws error"
+    replace: "throws"
+  - trigger: "async await"
+    replace: "async"
+  - trigger: "main actor"
+    replace: "@MainActor"
+  - trigger: "published"
+    replace: "@Published"
+  - trigger: "observed object"
+    replace: "@ObservedObject"
+  - trigger: "state object"
+    replace: "@StateObject"
+  - trigger: "environment object"
+    replace: "@EnvironmentObject"
+
+  # Logging (matches vx's own convention)
+  - trigger: "v x log"
+    replace: "vxLog(\"[\")"

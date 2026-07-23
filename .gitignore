@@ -3,6 +3,7 @@
 # Machine-local state and secrets
 .env*
 *.local
+.zshrc.local
 ssh-agent.env
 
 # Generated/runtime files

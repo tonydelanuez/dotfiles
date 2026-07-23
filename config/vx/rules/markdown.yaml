@@ -1,0 +1,44 @@
+# Markdown mode rules — applied after global.yaml.
+
+rules:
+  # Headings
+  - trigger: "heading one"
+    replace: "# "
+  - trigger: "heading two"
+    replace: "## "
+  - trigger: "heading three"
+    replace: "### "
+  - trigger: "heading four"
+    replace: "#### "
+
+  # Inline formatting
+  - trigger: "bold"
+    replace: "**"
+  - trigger: "italic"
+    replace: "_"
+  - trigger: "inline code"
+    replace: "`"
+  - trigger: "strikethrough"
+    replace: "~~"
+
+  # Block elements
+  - trigger: "bullet point"
+    replace: "- "
+  - trigger: "numbered item"
+    replace: "1. "
+  - trigger: "code block"
+    replace: "```"
+  - trigger: "blockquote"
+    replace: "> "
+  - trigger: "horizontal rule"
+    replace: "---"
+  - trigger: "task item"
+    replace: "- [ ] "
+  - trigger: "checked task"
+    replace: "- [x] "
+
+  # Links / images
+  - trigger: "link text"
+    replace: "[]()"
+  - trigger: "image"
+    replace: "![]()"

@@ -1,0 +1,11 @@
+# Chat mode rules — applied after global.yaml.
+# Formatting is primarily handled by AI post-processing.
+# Add shortcuts specific to chat messaging here, e.g.:
+#
+#   - trigger: "thumbs up"
+#     replace: "👍"
+#
+#   - trigger: "laugh out loud"
+#     replace: "lol"
+
+rules: []

@@ -1,0 +1,45 @@
+# Python code profile.
+# Loaded after global.yaml and code/global.yaml.
+
+rules:
+  # Structure
+  - trigger: "main guard"
+    replace: "if __name__ == '__main__':"
+  - trigger: "self dot"
+    replace: "self."
+  - trigger: "class init"
+    replace: "def __init__(self):"
+  - trigger: "class method"
+    replace: "def (self):"
+
+  # Builtins
+  - trigger: "print"
+    replace: "print()"
+  - trigger: "print f"
+    replace: "print(f'')"
+  - trigger: "range"
+    replace: "range()"
+  - trigger: "enumerate"
+    replace: "enumerate()"
+  - trigger: "zip"
+    replace: "zip()"
+  - trigger: "list comprehension"
+    replace: "[x for x in ]"
+  - trigger: "dict comprehension"
+    replace: "{k: v for k, v in }"
+
+  # Type hints
+  - trigger: "optional hint"
+    replace: "Optional[]"
+  - trigger: "list hint"
+    replace: "list[]"
+  - trigger: "dict hint"
+    replace: "dict[str, ]"
+  - trigger: "returns none"
+    replace: "-> None:"
+
+  # Error handling
+  - trigger: "try except"
+    replace: "try:\n    \nexcept Exception as e:\n    "
+  - trigger: "raise error"
+    replace: "raise ValueError()"
