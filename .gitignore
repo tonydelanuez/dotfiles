@@ -9,3 +9,4 @@ ssh-agent.env
 # Generated/runtime files
 .cache/
 config/**/.cache/
+config/sketchybar/helpers/query_spaces

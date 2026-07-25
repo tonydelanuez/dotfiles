@@ -15,13 +15,13 @@ The installer:
 - links shell configuration into `$HOME`;
 - links SketchyBar into `~/.config/sketchybar`;
 - installs the bundled SketchyBar app-symbol font;
-- starts SketchyBar and yabai.
+- starts SketchyBar and Amethyst.
 
 Existing files are moved aside with a `.dotfiles-backup-YYYYMMDDHHMMSS` suffix before linking.
 
 ## macOS permissions
 
-Grant Accessibility permissions to `yabai` and `SketchyBar` in System Settings → Privacy & Security → Accessibility. Yabai’s optional scripting addition is not required for the SketchyBar desktop switching used here.
+Grant Accessibility permissions to `Amethyst` and `SketchyBar` in System Settings → Privacy & Security → Accessibility.
 
 ## Syncing
 

@@ -1,0 +1,18 @@
+2026-07-23T20:40:26.842907Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=86404
+2026-07-23T20:40:26.842979Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-23T20:40:27.093186Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-23T20:40:49.382654Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=88693
+2026-07-23T20:40:49.382916Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-23T20:40:49.520481Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-24T23:03:53.768755Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=9888
+2026-07-24T23:03:53.768914Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-24T23:03:53.773617Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-24T23:14:11.157107Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=7273
+2026-07-24T23:14:11.157239Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-24T23:14:11.405979Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-25T16:30:42.740487Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=10231
+2026-07-25T16:30:42.740731Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-25T16:30:42.949427Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame
+2026-07-25T16:35:45.783723Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=14991
+2026-07-25T16:35:45.784003Z  INFO herdr::client: connecting to server path=/Users/tdoot/.config/herdr/herdr-client.sock
+2026-07-25T16:35:45.884032Z  INFO herdr::client: handshake succeeded version=17 encoding=SemanticFrame

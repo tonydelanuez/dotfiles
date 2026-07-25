@@ -5,9 +5,8 @@
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 
 SID="${NAME#space.}"
-FOCUSED="$(yabai -m query --spaces 2>/dev/null | jq -r --argjson sid "$SID" '.[] | select(.index == $sid) | .["has-focus"]')"
 
-if [ "$FOCUSED" = "true" ]; then
+if [ "$SELECTED" = "true" ]; then
   sketchybar --set "$NAME" \
     icon.highlight=on
   sketchybar --set "desktop.$SID" \

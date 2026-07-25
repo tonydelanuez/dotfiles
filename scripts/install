@@ -56,26 +56,47 @@ fi
 print "Installing Homebrew dependencies..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
-link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES_DIR/.zsh_aliases" "$HOME/.zsh_aliases"
-link_file "$DOTFILES_DIR/.ssh_agent" "$HOME/.ssh_agent"
-link_file "$DOTFILES_DIR/.scripts" "$HOME/.scripts"
-link_file "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
-link_file "$DOTFILES_DIR/config/herdr" "$HOME/.config/herdr"
-link_file "$DOTFILES_DIR/config/vx" "$HOME/.vx"
-link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" \
-          "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+# --- Shell ---
+link_file "$DOTFILES_DIR/.zshrc"        "$HOME/.zshrc"
+link_file "$DOTFILES_DIR/.zsh_aliases"  "$HOME/.zsh_aliases"
+link_file "$DOTFILES_DIR/.ssh_agent"    "$HOME/.ssh_agent"
+link_file "$DOTFILES_DIR/.scripts"      "$HOME/.scripts"
 
+# --- Terminal ---
+link_file "$DOTFILES_DIR/config/ghostty"    "$HOME/.config/ghostty"
+link_file "$DOTFILES_DIR/config/herdr"      "$HOME/.config/herdr"
+
+# --- Bar ---
+link_file "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
+
+# Compile the CoreGraphics space-query helper (replaces yabai -m query)
+HELPER_SRC="$HOME/.config/sketchybar/helpers/query_spaces.m"
+HELPER_BIN="$HOME/.config/sketchybar/helpers/query_spaces"
+if [ -f "$HELPER_SRC" ] && [ "$HELPER_SRC" -nt "$HELPER_BIN" ]; then
+  print "Compiling query_spaces helper…"
+  clang -framework Foundation -framework CoreGraphics -framework AppKit \
+        -fobjc-arc -O2 -o "$HELPER_BIN" "$HELPER_SRC" || true
+fi
+
+# --- Other ---
+link_file "$DOTFILES_DIR/config/vx"         "$HOME/.vx"
+
+# --- WM ---
+# Amethyst stores prefs in macOS defaults — no config file needed
+open -a Amethyst 2>/dev/null || true
+
+# --- Fonts ---
 if [[ -d "$HOME/Library/Fonts" ]]; then
   install_font "$DOTFILES_DIR/fonts/sketchybar-app-font.ttf" \
                "$HOME/Library/Fonts/sketchybar-app-font.ttf"
 fi
 
+# --- Services ---
 brew services restart sketchybar 2>/dev/null || brew services start sketchybar
-yabai --start-service || true
-sketchybar --reload
-"$DOTFILES_DIR/config/amethyst/defaults.sh"
+sleep 1
+sketchybar --reload 2>/dev/null || true
+herdr server reload-config 2>/dev/null || true
 
 print ""
 print "Dotfiles installed from $DOTFILES_DIR"
-print "Grant Accessibility permissions to yabai and SketchyBar if prompted."
+print "Ensure Amethyst has Accessibility permissions if windows aren't tiling."

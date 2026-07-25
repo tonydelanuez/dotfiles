@@ -1,11 +1,15 @@
+onboarding = false
 # herdr configuration
 # Keybindings ported from ~/.tmux.conf
-
 [theme]
-name = "catppuccin"
-auto_switch = true
-dark_name = "catppuccin"
-light_name = "catppuccin-latte"
+name = "terminal"
+auto_switch = false
+
+[theme.custom]
+accent = "#FFC107"
+panel_bg = "#121212"
+green = "#FFC107"
+red = "#D35F5F"
 
 [keys]
 prefix = "ctrl+s"
@@ -16,3 +20,11 @@ focus_pane_right = "ctrl+l"
 split_vertical = "prefix+%"
 split_horizontal = 'prefix+"'
 new_tab = "prefix+c"
+[[keys.command]]
+key = "prefix+f"
+type = "shell"
+command = "herdr plugin action invoke open-file-viewer --plugin herdr-file-viewer"
+[[keys.command]]
+key = "prefix+shift+f"
+type = "shell"
+command = "herdr plugin action invoke open-file-viewer-tab --plugin herdr-file-viewer"

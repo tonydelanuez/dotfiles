@@ -13,7 +13,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
 sketchybar --bar position=top display=all height=40 margin=0 corner_radius=0 \
-                 blur_radius=20 color=0x55000000 \
+                 blur_radius=20 color=0xcc121212 \
                  border_width=0 shadow=off topmost=off show_in_fullscreen=off \
                  padding_left=14 padding_right=14
 
@@ -27,10 +27,10 @@ default=(
   padding_right=2
   icon.font="Hack Nerd Font:Regular:14.0"
   label.font="SF Pro Text:Medium:12.0"
-  icon.color=0xffd3d9e2
-  label.color=0xffd3d9e2
-  icon.highlight_color=0xff17202b
-  label.highlight_color=0xff17202b
+  icon.color=0xffbebebe
+  label.color=0xffbebebe
+  icon.highlight_color=0xffffc107
+  label.highlight_color=0xffffc107
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
@@ -54,15 +54,17 @@ do
     icon.padding_right=7
     icon.width=24
     icon.align=center
+    icon.color=0xffbebebe
+    icon.highlight_color=0xffffc107
     label.font="sketchybar-app-font:Regular:16.0"
-    label.color=0xffd3d9e2
-    label.highlight_color=0xff17202b
+    label.color=0xffbebebe
+    label.highlight_color=0xffffc107
     label.drawing=on
     label.padding_left=3
     label.padding_right=5
     background.drawing=off
     script="$PLUGIN_DIR/space.sh"
-    click_script="yabai -m space --focus $sid"
+    click_script="open -a 'Mission Control'"
   )
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
   for slot in 1 2 3
@@ -75,21 +77,14 @@ do
                     padding_left=3 \
                     padding_right=3 \
                     icon.font="sketchybar-app-font:Regular:16.0" \
-                    icon.color=0xffd3d9e2 \
+                    icon.color=0xffbebebe \
                     background.drawing=off \
-                    click_script="yabai -m space --focus $sid"
+                    click_script="open -a 'Mission Control'"
   done
   sketchybar --add bracket desktop."$sid" \
              space."$sid" app_icon."$sid".1 app_icon."$sid".2 app_icon."$sid".3 \
              --set desktop."$sid" \
-                  background.drawing=on \
-                  background.color=0xe0000000 \
-                  background.border_color=0x253d4b5a \
-                  background.border_width=1 \
-                  background.corner_radius=7 \
-                  background.height=30 \
-                  background.padding_left=4 \
-                  background.padding_right=4
+                  background.drawing=off
   sketchybar --add item desktop_spacer."$sid" left \
              --set desktop_spacer."$sid" \
                   width=18 \
@@ -101,7 +96,7 @@ done
 sketchybar --add item now_playing left \
            --set now_playing drawing=off \
                           icon= \
-                          icon.color=0xffd3d9e2 \
+                          icon.color=0xffbebebe \
                           icon.padding_left=18 \
                           label.font="SF Pro Text:Medium:13.0" \
                           ignore_association=on \
@@ -110,7 +105,7 @@ sketchybar --add item now_playing left \
                           label.padding_left=18 \
                           label.padding_right=18 \
                           background.drawing=on \
-                          background.color=0xe0000000 \
+                          background.color=0xcc121212 \
                           background.corner_radius=8 \
                           background.height=32 \
                           background.padding_left=4 \
@@ -148,7 +143,7 @@ sketchybar --add item discord right \
                          label.padding_left=6 \
                          label.padding_right=6 \
                          background.drawing=on \
-                         background.color=0xe0000000 \
+                         background.color=0xcc121212 \
                          background.corner_radius=8 \
                          background.height=30 \
                          background.padding_left=12 \
@@ -158,16 +153,16 @@ sketchybar --add item discord right \
                          script="$PLUGIN_DIR/discord.sh" \
            --add item clock right \
            --set clock update_freq=10 icon=󰃰 script="$PLUGIN_DIR/clock.sh" \
-           --set clock background.drawing=on background.color=0xe0000000 \
+           --set clock background.drawing=on background.color=0xcc121212 \
                         background.corner_radius=8 background.height=30 \
            --add item volume right \
            --set volume icon=󰕾 update_freq=5 script="$PLUGIN_DIR/volume.sh" \
-           --set volume background.drawing=on background.color=0xe0000000 \
+           --set volume background.drawing=on background.color=0xcc121212 \
                          background.corner_radius=8 background.height=30 \
            --subscribe volume volume_change \
            --add item battery right \
            --set battery icon= update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --set battery background.drawing=on background.color=0xe0000000 \
+           --set battery background.drawing=on background.color=0xcc121212 \
                           background.corner_radius=8 background.height=30 \
            --subscribe battery system_woke power_source_change
 

@@ -30,3 +30,10 @@ export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 [[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 [[ -r "$HOME/.ssh_agent" ]] && source "$HOME/.ssh_agent"
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# bun completions
+[ -s "/Users/tdoot/.bun/_bun" ] && source "/Users/tdoot/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
