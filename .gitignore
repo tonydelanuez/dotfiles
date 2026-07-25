@@ -11,3 +11,6 @@ ssh-agent.env
 config/**/.cache/
 config/sketchybar/helpers/query_spaces
 config/herdr/plugins/
+config/herdr/herdr-*.log
+config/herdr/session.json
+config/herdr/.plugins.lock
