@@ -10,3 +10,4 @@ ssh-agent.env
 .cache/
 config/**/.cache/
 config/sketchybar/helpers/query_spaces
+config/herdr/plugins/
