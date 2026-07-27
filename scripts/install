@@ -72,7 +72,7 @@ link_file "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
 # Compile the CoreGraphics space-query helper (replaces yabai -m query)
 HELPER_SRC="$HOME/.config/sketchybar/helpers/query_spaces.m"
 HELPER_BIN="$HOME/.config/sketchybar/helpers/query_spaces"
-if [ -f "$HELPER_SRC" ] && [ "$HELPER_SRC" -nt "$HELPER_BIN" ]; then
+if [ -f "$HELPER_SRC" ] && { [ ! -x "$HELPER_BIN" ] || [ "$HELPER_SRC" -nt "$HELPER_BIN" ]; }; then
   print "Compiling query_spaces helper…"
   clang -framework Foundation -framework CoreGraphics -framework AppKit \
         -fobjc-arc -O2 -o "$HELPER_BIN" "$HELPER_SRC" || true
@@ -96,8 +96,8 @@ brew services restart sketchybar 2>/dev/null || brew services start sketchybar
 sleep 1
 sketchybar --reload 2>/dev/null || true
 herdr server reload-config 2>/dev/null || true
-yabai --start-service 2>/dev/null || true
-skhd --start-service 2>/dev/null || true
+yabai --restart-service
+skhd --restart-service
 
 print ""
 print "Dotfiles installed from $DOTFILES_DIR"
