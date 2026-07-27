@@ -23,11 +23,9 @@ cursor-text = #121212
 selection-background = #333333
 selection-foreground = #EAEAEA
 
-# ── Window chrome (minimal — let the terminal be the canvas) ────────
+# ── Window chrome (zero — pure canvas, no titlebar, no tabs, no icons) ─
 window-theme = dark
-macos-titlebar-style = transparent
-# client-side decorations = no native macOS tab icons
-window-decoration = client
+window-decoration = false
 
 # ── Palette (matte black + amber accent) ────────────────────────────
 palette = 0=#333333
