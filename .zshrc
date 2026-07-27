@@ -53,6 +53,8 @@ export VISUAL="${VISUAL:-$EDITOR}"
 export GEM_HOME="$HOME/gems"
 
 alias k='kubectl'
+alias cdx='codex --yolo'
+alias cld='claude --dangerously-skip-permissions'
 
 export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
