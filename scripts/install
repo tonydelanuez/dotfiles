@@ -82,8 +82,8 @@ fi
 link_file "$DOTFILES_DIR/config/vx"         "$HOME/.vx"
 
 # --- WM ---
-# Amethyst stores prefs in macOS defaults — no config file needed
-open -a Amethyst 2>/dev/null || true
+link_file "$DOTFILES_DIR/.yabairc" "$HOME/.yabairc"
+link_file "$DOTFILES_DIR/.skhdrc" "$HOME/.skhdrc"
 
 # --- Fonts ---
 if [[ -d "$HOME/Library/Fonts" ]]; then
@@ -96,7 +96,9 @@ brew services restart sketchybar 2>/dev/null || brew services start sketchybar
 sleep 1
 sketchybar --reload 2>/dev/null || true
 herdr server reload-config 2>/dev/null || true
+yabai --start-service 2>/dev/null || true
+skhd --start-service 2>/dev/null || true
 
 print ""
 print "Dotfiles installed from $DOTFILES_DIR"
-print "Ensure Amethyst has Accessibility permissions if windows aren't tiling."
+print "Ensure yabai and skhd have Accessibility permissions in System Settings → Privacy & Security → Accessibility."

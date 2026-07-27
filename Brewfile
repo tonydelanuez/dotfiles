@@ -1,4 +1,6 @@
 tap "asmvik/formulae"
 brew "jq"
 brew "sketchybar"
+brew "yabai"
+brew "skhd"
 cask "font-hack-nerd-font"
