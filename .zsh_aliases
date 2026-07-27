@@ -5,3 +5,10 @@ alias historyfix='$HOME/.scripts/fix_history'
 # Python
 alias ve='/usr/bin/python3 -m venv .venv'
 alias va='source .venv/bin/activate'
+
+# Paas — jump to the monorepo on any machine
+if [[ -d /opt/paas ]]; then
+  alias paas='cd /opt/paas'
+elif [[ -d ~/dev/workers/paas ]]; then
+  alias paas='cd ~/dev/workers/paas'
+fi
