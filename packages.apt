@@ -1,0 +1,40 @@
+# Remote dev packages — install with:
+#   sudo apt-get update && xargs -a packages.apt sudo apt-get install -y
+
+zsh
+git
+curl
+wget
+build-essential
+unzip
+
+# ── Terminal multiplexer ────────────────────────────────────────────
+# herdr is the primary multiplexer (installed separately via cargo or binary)
+
+# ── Editors ─────────────────────────────────────────────────────────
+neovim
+vim
+
+# ── Shell tools ─────────────────────────────────────────────────────
+fzf
+ripgrep
+fd-find
+bat
+eza
+direnv
+jq
+tree
+htop
+tmux                # fallback if herdr isn't available
+
+# ── Languages & runtimes ────────────────────────────────────────────
+python3
+python3-pip
+python3-venv
+nodejs
+npm
+
+# ── Development ─────────────────────────────────────────────────────
+openssh-client
+gnupg
+ca-certificates

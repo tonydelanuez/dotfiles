@@ -1,0 +1,28 @@
+[user]
+	# Set per-machine in ~/.gitconfig.local:
+	#   name = Your Name
+	#   email = you@example.com
+[core]
+	editor = vim
+	pager = less -F -X
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[alias]
+	br = branch
+	co = checkout
+	ci = commit
+	st = status
+	lg = log --oneline --graph --decorate -20
+	la = log --oneline --graph --decorate --all -20
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[color]
+	ui = auto
+[diff]
+	colorMoved = zebra
+[includeIf "gitdir:~/.local/code/"]
+	path = ~/.gitconfig.work

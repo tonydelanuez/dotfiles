@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+#
+# install-linux — bootstrap a remote dev machine (Ubuntu/Debian).
+#
+# Usage:
+#   git clone https://github.com/tonydelanuez/dotfiles.git ~/dotfiles
+#   ~/dotfiles/scripts/install-linux
+#
+# This links only cross-platform + linux config.  macOS-only tools
+# (yabai, skhd, sketchybar, amethyst, ghostty, vx, spicetify) are skipped.
+
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+# ── Colours ───────────────────────────────────────────────────────────
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+die() {
+  echo -e "${RED}error:${NC} $*" >&2
+  exit 1
+}
+
+info() {
+  echo -e "${GREEN}==>${NC} $*"
+}
+
+# ── Symlink helper ────────────────────────────────────────────────────
+link_file() {
+  local source="$1"
+  local target="$2"
+
+  mkdir -p "$(dirname "$target")"
+
+  # Already correctly linked
+  if [[ -L "$target" && "$(readlink "$target")" == "$source" ]]; then
+    return
+  fi
+
+  if [[ -e "$target" || -L "$target" ]]; then
+    local backup="${target}.dotfiles-backup.$(date +%Y%m%d%H%M%S)"
+    info "Backing up $target -> $backup"
+    mv "$target" "$backup"
+  fi
+
+  ln -s "$source" "$target"
+  info "Linked $target -> $source"
+}
+
+# ── Install system packages ───────────────────────────────────────────
+if [[ -f /etc/debian_version ]]; then
+  info "Installing apt packages..."
+  sudo apt-get update -qq
+  xargs -a "$DOTFILES_DIR/packages.apt" sudo apt-get install -y -qq
+else
+  info "Skipping package install — not a Debian/Ubuntu system."
+  info "Install packages manually from $DOTFILES_DIR/packages.apt"
+fi
+
+# ── Oh My Zsh ─────────────────────────────────────────────────────────
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  info "Installing Oh My Zsh..."
+  RUNZSH=no KEEP_ZSHRC=yes \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+# ── Set zsh as default shell ─────────────────────────────────────────
+if [[ "$SHELL" != *zsh* ]] && command -v zsh >/dev/null 2>&1; then
+  info "Setting zsh as default shell..."
+  sudo chsh -s "$(command -v zsh)" "$USER"
+fi
+
+# ── nvm ───────────────────────────────────────────────────────────────
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [[ ! -d "$NVM_DIR" ]]; then
+  info "Installing nvm..."
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
+  cd - > /dev/null
+fi
+# Load nvm so we can use it immediately
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
+# ── Rust / Cargo (needed for herdr) ──────────────────────────────────
+if ! command -v cargo >/dev/null 2>&1; then
+  info "Installing Rust..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+  [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+fi
+
+# ── herdr ─────────────────────────────────────────────────────────────
+if ! command -v herdr >/dev/null 2>&1; then
+  info "Installing herdr..."
+  cargo install herdr
+fi
+
+# ── bun (optional, fast Node.js runtime) ─────────────────────────────
+if ! command -v bun >/dev/null 2>&1; then
+  info "Installing bun..."
+  curl -fsSL https://bun.sh/install | bash
+fi
+
+# ── Link dotfiles ─────────────────────────────────────────────────────
+info "Linking dotfiles..."
+
+# Shell
+link_file "$DOTFILES_DIR/.zshrc"         "$HOME/.zshrc"
+link_file "$DOTFILES_DIR/.zshrc.linux"   "$HOME/.zshrc.linux"
+link_file "$DOTFILES_DIR/.zsh_aliases"   "$HOME/.zsh_aliases"
+link_file "$DOTFILES_DIR/.ssh_agent"     "$HOME/.ssh_agent"
+link_file "$DOTFILES_DIR/.scripts"       "$HOME/.scripts"
+
+# Git
+link_file "$DOTFILES_DIR/.gitconfig"     "$HOME/.gitconfig"
+
+# Vim
+link_file "$DOTFILES_DIR/.vimrc"         "$HOME/.vimrc"
+
+# herdr (terminal multiplexer — cross-platform)
+link_file "$DOTFILES_DIR/config/herdr"   "$HOME/.config/herdr"
+
+# Neovim (minimal kickstart for remote, if you add one later)
+if [[ -d "$DOTFILES_DIR/config/nvim" ]]; then
+  link_file "$DOTFILES_DIR/config/nvim"  "$HOME/.config/nvim"
+fi
+
+# ── Post-install ──────────────────────────────────────────────────────
+echo ""
+echo "─────────────────────────────────────────────────"
+info "Linux dotfiles installed from $DOTFILES_DIR"
+echo ""
+echo "Next steps:"
+echo "  1. Create ~/.gitconfig.local with your name & email:"
+echo "     [user]"
+echo "       name = Your Name"
+echo "       email = you@example.com"
+echo ""
+echo "  2. Reload:  exec zsh"
+echo "  3. Start herdr:  herdr"
+echo "  4. Install a Node LTS:  nvm install --lts"
+echo ""
+echo "Optional:"
+echo "  • pyenv:   curl https://pyenv.run | bash"
+echo "  • fzf keybindings will load on next shell (already installed via apt)"
+echo "─────────────────────────────────────────────────"
