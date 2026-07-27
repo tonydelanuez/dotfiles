@@ -1,11 +1,39 @@
-# Matte Black theme — from Omarchy
+# ── Omarchy "Matte Black" — DHH-style terminal ricing ─────────────
 # https://github.com/tahayvr/omarchy-matte-black
 
-font-size = 14
-window-padding-x = 8
-window-padding-y = 8
-confirm-close-surface = false
+# ── Typography ──────────────────────────────────────────────────────
+font-size = 16
+font-family = SF Mono
+font-feature = calt
+bold-is-bright = true
 
+# ── Canvas (generous padding = the framed "matte" look) ─────────────
+window-padding-x = 24
+window-padding-y = 20
+background = #121212
+foreground = #BEBEBE
+
+# ── Cursor ──────────────────────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = true
+cursor-color = #FFC107
+cursor-text = #121212
+
+# ── Selection ───────────────────────────────────────────────────────
+selection-background = #333333
+selection-foreground = #EAEAEA
+
+# ── Window chrome (minimal — let the terminal be the canvas) ────────
+window-theme = dark
+macos-titlebar-style = transparent
+window-decoration = auto
+
+# ── Tabs (compact, tidy, limited width) ────────────────────────────
+tab-min-width = 120
+tab-max-width = 240
+tab-title = default
+
+# ── Palette (matte black + amber accent) ────────────────────────────
 palette = 0=#333333
 palette = 1=#D35F5F
 palette = 2=#FFC107
@@ -23,9 +51,5 @@ palette = 13=#B91C1C
 palette = 14=#EAEAEA
 palette = 15=#FFFFFF
 
-background = #121212
-foreground = #BEBEBE
-cursor-color = #EAEAEA
-cursor-text = #121212
-selection-background = #333333
-selection-foreground = #EAEAEA
+# ── Misc ────────────────────────────────────────────────────────────
+confirm-close-surface = false
