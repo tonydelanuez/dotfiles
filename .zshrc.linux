@@ -38,3 +38,7 @@ fi
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
+
+# ── pi coding agent ──────────────────────────────────────────────────
+export PI_MODEL=deepseek-v4-pro
+export PI_PROVIDER=deepseek
